@@ -1,4 +1,4 @@
-#Java Recursion Practice
+# Java Recursion Practice
 
 This repository is intended for practicing recursion in Java. It includes a set of small programming tasks designed to improve your skills in using recursion. Each task is presented as a separate Java class that you can complete and submit as a commit to the repository.
 
