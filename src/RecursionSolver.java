@@ -29,4 +29,16 @@ public class RecursionSolver {
             default -> calculateFibonacci(memberIndex, 1, 0, 1);
         };
     }
+
+    private int sumDigit (int number, int sum) {
+        if (number < 10) {
+            sum += number;
+            return sum;
+        }
+        return sumDigit(number / 10, sum + number % 10);
+    }
+
+    public int sumOfNumbersDigits(int number) {
+        return sumDigit(number, 0);
+    }
 }
