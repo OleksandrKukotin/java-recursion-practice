@@ -4,7 +4,7 @@ This repository is intended for practicing recursion in Java. It includes a set 
 
 ## Tasks
 - **Factorial**: Write a function to calculate the factorial of a number using recursion. ✓
-- **Fibonacci**: Write a function to calculate the nth Fibonacci number using recursion.
+- **Fibonacci**: Write a function to calculate the N-th Fibonacci number using recursion. ✓
 - **Array Sum**: Write a function to find the sum of all numbers in an array using recursion.
 - **Digit Sum**: Write a function to calculate the sum of the digits of a number using recursion.
 - **String Reversal**: Write a function to reverse a string using recursion.
