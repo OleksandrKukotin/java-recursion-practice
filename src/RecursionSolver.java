@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class RecursionSolver {
 
     private int factorialHelper(int number, int result) {
@@ -40,5 +42,21 @@ public class RecursionSolver {
 
     public int sumOfNumbersDigits(int number) {
         return sumDigit(number, 0);
+    }
+
+    private float sumArrayElement(float[] array, float result) {
+        int arrayLength = array.length;
+        if (arrayLength == 0) {
+            return result;
+        }
+        float[] newArray = Arrays.copyOf(array, arrayLength - 1);
+        return sumArrayElement(newArray, result + newArray[newArray.length]);
+    }
+
+    public float arraySum(float[] array) {
+        if (array.length == 0) {
+            return 0;
+        }
+        return sumArrayElement(array, 0);
     }
 }
