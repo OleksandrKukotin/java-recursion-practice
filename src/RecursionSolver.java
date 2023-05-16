@@ -50,7 +50,7 @@ public class RecursionSolver {
             return result;
         }
         float[] newArray = Arrays.copyOf(array, arrayLength - 1);
-        return sumArrayElement(newArray, result + newArray[newArray.length]);
+        return sumArrayElement(newArray, result + array[newArray.length]);
     }
 
     public float arraySum(float[] array) {
