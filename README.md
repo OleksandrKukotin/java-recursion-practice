@@ -8,7 +8,7 @@ This repository is intended for practicing recursion in Java. It includes a set 
 - **Array Sum**: Write a function to find the sum of all numbers in an array using recursion. ✓
 - **Digit Sum**: Write a function to calculate the sum of the digits of a number using recursion. ✓
 - **String Reversal**: Write a function to reverse a string using recursion.
-- **Array Max**: Write a function to find the largest element in an array using recursion.
+- **Array Max**: Write a function to find the largest element in an array using recursion. ✓
 - **Array Count**: Write a function to count the number of occurrences of an element in an array using recursion.
 - **The Greatest Common Divisor**: Write a function to find the GCD (The Greatest Common Divisor) of two numbers using recursion.
 - **Palindrome**: Write a function to check if a string is a palindrome using recursion.

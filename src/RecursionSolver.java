@@ -59,4 +59,20 @@ public class RecursionSolver {
         }
         return sumArrayElement(array, 0);
     }
+
+    private int findMax(int[] array, int max) {
+        int arrayLength = array.length;
+        if (arrayLength == 0) {
+            return max;
+        }
+        int[] newArray = Arrays.copyOf(array, arrayLength - 1);
+        if (array[newArray.length] > max) {
+            max = array[newArray.length];
+        }
+        return findMax(newArray, max);
+    }
+
+    public int findArrayMax(int[] array) {
+        return findMax(array, 0);
+    }
 }
