@@ -75,4 +75,23 @@ public class RecursionSolver {
     public int findArrayMax(int[] array) {
         return findMax(array, 0);
     }
+
+    private String reverseLetter(char[] targetChars, String result) {
+        int targetLength = targetChars.length;
+        if (targetLength == 0) {
+            return result;
+        }
+        char[] newTargetChars = Arrays.copyOf(targetChars, targetLength - 1);
+        return reverseLetter(newTargetChars, result + targetChars[targetLength - 1]);
+    }
+
+    public String reverseString(String target) {
+        if (target.isEmpty()) {
+            return "";
+        }
+        if (target.length() == 1) {
+            return target;
+        }
+        return reverseLetter(target.toCharArray(), "");
+    }
 }
