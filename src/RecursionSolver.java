@@ -32,7 +32,7 @@ public class RecursionSolver {
         };
     }
 
-    private int sumDigit (int number, int sum) {
+    private int sumDigit(int number, int sum) {
         if (number < 10) {
             sum += number;
             return sum;
@@ -93,5 +93,22 @@ public class RecursionSolver {
             return target;
         }
         return reverseLetter(target.toCharArray(), "");
+    }
+
+    private int count(int[] array, int currentIndex, int wanted, int counter) {
+        if (currentIndex + 1 > array.length) {
+            return counter;
+        }
+        if (wanted == array[currentIndex]) {
+            counter += 1;
+        }
+        return count(array, currentIndex + 1, wanted, counter);
+    }
+
+    public int arrayCount(int[] array, int wanted) {
+        if (array.length == 0) {
+            return 0;
+        }
+        return count(array, 0, wanted, 0);
     }
 }

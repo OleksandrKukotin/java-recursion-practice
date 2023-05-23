@@ -11,6 +11,7 @@ public class MainApplication {
         int[] intTestArray = {4, 4, 2, 52, 4, 100, 8, 69, 138, 684, 0, 1, 1, 1, 5};
         System.out.println(String.format("Sum of elements of the test array: %f", recursionSolver.arraySum(testArray)));
         System.out.println(String.format("Max element of the test array: %d", recursionSolver.findArrayMax(intTestArray)));
-        System.out.println(recursionSolver.reverseString("Reversed String : hello world"));
+        System.out.println(recursionSolver.reverseString("dlrow olleh : gnirtS desreveR"));
+        System.out.println(String.format("Number of occurrences of %d in the test array: %d", 4, recursionSolver.arrayCount(intTestArray, 4)));
     }
 }
