@@ -111,4 +111,14 @@ public class RecursionSolver {
         }
         return count(array, 0, wanted, 0);
     }
+
+    public int findGCD(int firstNumber, int secondNumber) {
+        if (firstNumber == 0) {
+            return secondNumber;
+        }
+        if (secondNumber == 0) {
+            return firstNumber;
+        }
+        return findGCD(secondNumber, firstNumber % secondNumber);
+    }
 }
