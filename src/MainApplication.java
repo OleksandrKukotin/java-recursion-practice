@@ -14,5 +14,6 @@ public class MainApplication {
         System.out.println(recursionSolver.reverseString("dlrow olleh : gnirtS desreveR"));
         System.out.println(String.format("Number of occurrences of %d in the test array: %d", 4, recursionSolver.arrayCount(intTestArray, 4)));
         System.out.println(String.format("The Greatest Common Divisor for 200 and 3564 is %d", recursionSolver.findGCD(200, 3564)));
+        System.out.println(recursionSolver.isPalindrome("ab1121ba"));
     }
 }

@@ -121,4 +121,16 @@ public class RecursionSolver {
         }
         return findGCD(secondNumber, firstNumber % secondNumber);
     }
+
+    public boolean isPalindrome(String text) {
+        int length = text.length();
+        if (length == 0 || length == 1) {
+            return true;
+        }
+        if (text.substring(0, 1).equals(text.substring(length - 1))) {
+            return isPalindrome(text.substring(1, length - 1));
+        } else {
+            return false;
+        }
+    }
 }
