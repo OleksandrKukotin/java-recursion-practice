@@ -2,19 +2,11 @@ import java.util.Arrays;
 
 public class RecursionSolver {
 
-    private int factorialHelper(int number, int result) {
-        if (number == 1) {
-            return result;
-        }
-        result *= number;
-        return factorialHelper(number - 1, result);
-    }
-
     public int factorial(int number) {
         if (number == 0) {
             return 1;
         }
-        return factorialHelper(number, 1);
+        return number * factorial(number - 1);
     }
 
     private int calculateFibonacci(int memberIndex, int currentIndex, int prePreviousMember, int previousMember) {
