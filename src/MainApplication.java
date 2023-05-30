@@ -16,5 +16,9 @@ public class MainApplication {
         System.out.println(String.format("The Greatest Common Divisor for 200 and 3564 is %d", recursionSolver.findGCD(200, 3564)));
         System.out.println(recursionSolver.isPalindrome("ab1121ba"));
         System.out.println(recursionSolver.power(3,3));
+        RBNode root = new RBNode(5);
+        root.insertNode(8);
+        root.insertNode(2);
+        System.out.println(root);
     }
 }
