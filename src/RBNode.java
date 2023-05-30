@@ -42,8 +42,25 @@ public class RBNode {
     }
 
     public boolean deleteNode(int value) {
-        // TODO: implement
-        return true;
+        if (value >= this.value) {
+            if (this.rightChild.value == value) {
+                this.rightChild = new RBNode();
+                return true;
+            }
+            else {
+                this.rightChild.deleteNode(value);
+            }
+        }
+        else {
+            if (this.leftChild.value == value) {
+                this.leftChild = new RBNode();
+                return true;
+            }
+            else {
+                this.leftChild.deleteNode(value);
+            }
+        }
+        return false;
     }
 
 
@@ -63,12 +80,6 @@ public class RBNode {
 
     @Override
     public String toString() {
-        return "RBNode {\n" +
-            "value=" + value +
-            ", \nisLeaf=" + isLeaf +
-            ", \nnodeColor=" + nodeColor +
-            ", \nleftChild=" + leftChild +
-            ", \nrightChild=" + rightChild +
-            "}";
+        return value + "\n" + "left- " + leftChild.value + "\n" + rightChild.value + " -right";
     }
 }

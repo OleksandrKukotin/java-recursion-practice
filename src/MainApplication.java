@@ -20,5 +20,8 @@ public class MainApplication {
         root.insertNode(8);
         root.insertNode(2);
         System.out.println(root);
+        root.deleteNode(8);
+        System.out.println("After deleting 8 node");
+        System.out.println(root);
     }
 }
