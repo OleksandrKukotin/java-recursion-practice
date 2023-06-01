@@ -1,3 +1,5 @@
+package redBlackTreeOperations;
+
 public class RBNode {
 
     private int value;
@@ -70,8 +72,28 @@ public class RBNode {
     }
 
     private boolean isBalanced() {
-        // TODO: implement
-        return true;
+        if (this.isLeaf) {
+            return true;
+        }
+
+        int leftHeight = this.leftChild.getHeight();
+        int rightHeight = this.rightChild.getHeight();
+
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return false;
+        }
+
+        return this.leftChild.isBalanced() && this.rightChild.isBalanced();
+    }
+
+    private int getHeight() {
+        if (this.isLeaf) {
+            return 0;
+        }
+        int leftHeight = this.leftChild.getHeight();
+        int rightHeight = this.rightChild.getHeight();
+
+        return 1 + Math.max(leftHeight, rightHeight);
     }
 
     public void treeTraversal() {
