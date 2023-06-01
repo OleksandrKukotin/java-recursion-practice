@@ -1,4 +1,5 @@
 import redBlackTreeOperations.RBNode;
+import redBlackTreeOperations.TraversalType;
 
 public class MainApplication {
 
@@ -19,11 +20,30 @@ public class MainApplication {
         System.out.println(recursionSolver.isPalindrome("ab1121ba"));
         System.out.println(recursionSolver.power(3,3));
         RBNode root = new RBNode(5);
-        root.insertNode(8);
+
+        root.insertNode(3);
+        root.insertNode(7);
         root.insertNode(2);
+        root.insertNode(4);
+        root.insertNode(6);
+        root.insertNode(8);
+
+        System.out.println("Initial tree:");
         System.out.println(root);
+
+        root.deleteNode(4);
         root.deleteNode(8);
-        System.out.println("After deleting 8 node");
+
+        System.out.println("Tree after node deletion:");
         System.out.println(root);
+
+        System.out.println("In-order traversal:");
+        root.treeTraversal(TraversalType.IN_ORDER);
+
+        System.out.println("Pre-order traversal:");
+        root.treeTraversal(TraversalType.PRE_ORDER);
+
+        System.out.println("Post-order traversal:");
+        root.treeTraversal(TraversalType.POST_ORDER);
     }
 }

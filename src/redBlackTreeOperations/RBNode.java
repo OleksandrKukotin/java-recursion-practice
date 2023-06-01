@@ -96,8 +96,47 @@ public class RBNode {
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
-    public void treeTraversal() {
-        // TODO: implement
+    private void preOrderTraversal(RBNode node) {
+        if (node.isLeaf) {
+            return;
+        }
+
+        System.out.println(node.value);
+
+        preOrderTraversal(node.leftChild);
+        preOrderTraversal(node.rightChild);
+    }
+
+    private void postOrderTraversal(RBNode node) {
+        if (node.isLeaf) {
+            return;
+        }
+
+        postOrderTraversal(node.leftChild);
+        postOrderTraversal(node.rightChild);
+
+        System.out.println(node.value);
+    }
+
+    private void inOrderTraversal(RBNode node) {
+        if (node.isLeaf) {
+            return;
+        }
+
+        inOrderTraversal(node.leftChild);
+
+        System.out.println(node.value);
+
+        inOrderTraversal(node.rightChild);
+    }
+
+    public void treeTraversal(TraversalType type) {
+        switch (type) {
+            case PRE_ORDER -> preOrderTraversal(this);
+            case POST_ORDER -> postOrderTraversal(this);
+            case IN_ORDER -> inOrderTraversal(this);
+            default -> System.out.println("Invalid traversal type.");
+        }
     }
 
     @Override
