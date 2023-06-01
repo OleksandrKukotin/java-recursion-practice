@@ -139,8 +139,26 @@ public class RBNode {
         }
     }
 
-    @Override
-    public String toString() {
-        return value + "\n" + "left- " + leftChild.value + "\n" + rightChild.value + " -right";
+    public void printTree() {
+        printTreeHelper(this, "");
+    }
+
+    private void printTreeHelper(RBNode node, String indent) {
+        if (node.isLeaf) {
+            System.out.println(indent + "- LEAF");
+            return;
+        }
+
+        System.out.println(indent + "- " + node.value + " (" + node.nodeColor + ")");
+
+        if (node.leftChild != null) {
+            System.out.print(indent + "  L: ");
+            printTreeHelper(node.leftChild, indent + "     ");
+        }
+
+        if (node.rightChild != null) {
+            System.out.print(indent + "  R: ");
+            printTreeHelper(node.rightChild, indent + "     ");
+        }
     }
 }

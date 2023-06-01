@@ -25,17 +25,12 @@ public class MainApplication {
         root.insertNode(7);
         root.insertNode(2);
         root.insertNode(4);
+        root.insertNode(1);
+        root.insertNode(10);
+        root.insertNode(5);
         root.insertNode(6);
         root.insertNode(8);
-
-        System.out.println("Initial tree:");
-        System.out.println(root);
-
-        root.deleteNode(4);
-        root.deleteNode(8);
-
-        System.out.println("Tree after node deletion:");
-        System.out.println(root);
+        root.printTree();
 
         System.out.println("In-order traversal:");
         root.treeTraversal(TraversalType.IN_ORDER);
