@@ -65,10 +65,53 @@ public class RBNode {
         return false;
     }
 
-
+    RotateCondition determineRotateCondition() {
+        if (this.nodeColor == Color.RED) {
+            if (this.leftChild.nodeColor == Color.RED) {
+                if (this.leftChild.leftChild.nodeColor == Color.RED) {
+                    return RotateCondition.LL;
+                }
+                if (this.leftChild.rightChild.nodeColor == Color.RED) {
+                    return RotateCondition.LR;
+                }
+            }
+            if (this.rightChild.nodeColor == Color.RED) {
+                if (this.rightChild.rightChild.nodeColor == Color.RED) {
+                    return RotateCondition.RR;
+                }
+                if (this.rightChild.leftChild.nodeColor == Color.RED) {
+                    return RotateCondition.RL;
+                }
+            }
+        }
+        return RotateCondition.NN;
+    }
     private boolean rotate() {
+        RotateCondition condition = this.determineRotateCondition();
+        if (condition == RotateCondition.LL || condition == RotateCondition.RL) {
+            return this.rightRotate();
+        } else if (condition == RotateCondition.LR || condition == RotateCondition.RR) {
+            return this.leftRotate();
+        }
+        return false;
+    }
+
+    private boolean leftRotate() {
         // TODO: implement
         return true;
+    }
+
+    private boolean rightRotate() {
+        // TODO: implement
+        return true;
+    }
+
+    private boolean fixColor() {
+        if (this.leftChild.nodeColor == Color.RED || this.rightChild.nodeColor == Color.RED) {
+            this.nodeColor = Color.BLACK;
+            return true;
+        }
+        return false;
     }
 
     private boolean isBalanced() {
