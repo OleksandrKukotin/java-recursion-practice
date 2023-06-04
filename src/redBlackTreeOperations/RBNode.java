@@ -7,12 +7,14 @@ public class RBNode {
     private Color nodeColor;
     private RBNode leftChild;
     private RBNode rightChild;
+    private RBNode parent;
 
     public RBNode(int value) {
         this.value = value;
         this.isLeaf = false;
         this.leftChild = new RBNode();
         this.rightChild = new RBNode();
+        this.parent = null;
         this.nodeColor = Color.RED;
     }
 
@@ -25,6 +27,7 @@ public class RBNode {
         if (value >= this.value) {
             if (this.rightChild.isLeaf) {
                 this.rightChild = new RBNode(value);
+                this.rightChild.parent = this;
                 return true;
             }
             else {
@@ -34,6 +37,7 @@ public class RBNode {
         else {
             if (this.leftChild.isLeaf) {
                 this.leftChild = new RBNode(value);
+                this.leftChild.parent = this;
                 return true;
             }
             else {
@@ -97,8 +101,34 @@ public class RBNode {
     }
 
     private boolean leftRotate() {
-        // TODO: implement
+        if (this.rightChild.isLeaf) {
+            return false; // Cannot perform left rotation if the right child is a leaf node
+        }
+
+        RBNode newRoot = this.rightChild;
+        this.rightChild = newRoot.leftChild;
+        newRoot.leftChild = this;
+
+        if (!this.isRoot()) {
+            if (this.isLeftChild()) {
+                this.parent.leftChild = newRoot;
+            } else {
+                this.parent.rightChild = newRoot;
+            }
+        } else {
+            // If the current node is the root, update the root reference
+            this.setRoot(newRoot);
+        }
+
         return true;
+    }
+
+    private boolean isLeftChild() {
+        return this.parent.leftChild == this;
+    }
+
+    private boolean isRoot() {
+        return this.parent == null;
     }
 
     private boolean rightRotate() {
