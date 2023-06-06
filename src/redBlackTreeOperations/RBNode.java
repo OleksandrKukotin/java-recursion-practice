@@ -28,45 +28,57 @@ public class RBNode {
             if (this.rightChild.isLeaf) {
                 this.rightChild = new RBNode(value);
                 this.rightChild.parent = this;
+                fixColor(); // Fix color after insertion
                 return true;
+            } else {
+                boolean inserted = this.rightChild.insertNode(value);
+                if (inserted) {
+                    fixColor(); // Fix color after insertion
+                }
+                return inserted;
             }
-            else {
-                this.rightChild.insertNode(value);
-            }
-        }
-        else {
+        } else {
             if (this.leftChild.isLeaf) {
                 this.leftChild = new RBNode(value);
                 this.leftChild.parent = this;
+                fixColor(); // Fix color after insertion
                 return true;
-            }
-            else {
-                this.leftChild.insertNode(value);
+            } else {
+                boolean inserted = this.leftChild.insertNode(value);
+                if (inserted) {
+                    fixColor(); // Fix color after insertion
+                }
+                return inserted;
             }
         }
-        return true;
     }
 
     public boolean deleteNode(int value) {
         if (value >= this.value) {
             if (this.rightChild.value == value) {
                 this.rightChild = new RBNode();
+                fixColor(); // Fix color after deletion
                 return true;
+            } else {
+                boolean deleted = this.rightChild.deleteNode(value);
+                if (deleted) {
+                    fixColor(); // Fix color after deletion
+                }
+                return deleted;
             }
-            else {
-                this.rightChild.deleteNode(value);
-            }
-        }
-        else {
+        } else {
             if (this.leftChild.value == value) {
                 this.leftChild = new RBNode();
+                fixColor(); // Fix color after deletion
                 return true;
-            }
-            else {
-                this.leftChild.deleteNode(value);
+            } else {
+                boolean deleted = this.leftChild.deleteNode(value);
+                if (deleted) {
+                    fixColor(); // Fix color after deletion
+                }
+                return deleted;
             }
         }
-        return false;
     }
 
     RotateCondition determineRotateCondition() {
@@ -90,7 +102,8 @@ public class RBNode {
         }
         return RotateCondition.NN;
     }
-    private boolean rotate() {
+
+    public boolean rotate() {
         RotateCondition condition = this.determineRotateCondition();
         if (condition == RotateCondition.LL || condition == RotateCondition.RL) {
             return this.rightRotate();
@@ -115,9 +128,26 @@ public class RBNode {
             } else {
                 this.parent.rightChild = newRoot;
             }
-        } else {
-            // If the current node is the root, update the root reference
-            this.setRoot(newRoot);
+        }
+
+        return true;
+    }
+
+    private boolean rightRotate() {
+        if (this.leftChild.isLeaf) {
+            return false; // Cannot perform right rotation if the left child is a leaf node
+        }
+
+        RBNode newRoot = this.leftChild;
+        this.leftChild = newRoot.rightChild;
+        newRoot.rightChild = this;
+
+        if (!this.isRoot()) {
+            if (this.isLeftChild()) {
+                this.parent.leftChild = newRoot;
+            } else {
+                this.parent.rightChild = newRoot;
+            }
         }
 
         return true;
@@ -131,12 +161,7 @@ public class RBNode {
         return this.parent == null;
     }
 
-    private boolean rightRotate() {
-        // TODO: implement
-        return true;
-    }
-
-    private boolean fixColor() {
+    public boolean fixColor() {
         if (this.leftChild.nodeColor == Color.RED || this.rightChild.nodeColor == Color.RED) {
             this.nodeColor = Color.BLACK;
             return true;
@@ -144,7 +169,7 @@ public class RBNode {
         return false;
     }
 
-    private boolean isBalanced() {
+    public boolean isBalanced() {
         if (this.isLeaf) {
             return true;
         }
@@ -205,10 +230,17 @@ public class RBNode {
 
     public void treeTraversal(TraversalType type) {
         switch (type) {
-            case PRE_ORDER -> preOrderTraversal(this);
-            case POST_ORDER -> postOrderTraversal(this);
-            case IN_ORDER -> inOrderTraversal(this);
-            default -> System.out.println("Invalid traversal type.");
+            case PRE_ORDER:
+                preOrderTraversal(this);
+                break;
+            case POST_ORDER:
+                postOrderTraversal(this);
+                break;
+            case IN_ORDER:
+                inOrderTraversal(this);
+                break;
+            default:
+                System.out.println("Invalid traversal type.");
         }
     }
 
@@ -233,5 +265,53 @@ public class RBNode {
             System.out.print(indent + "  R: ");
             printTreeHelper(node.rightChild, indent + "     ");
         }
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public RBNode getLeftChild() {
+        return leftChild;
+    }
+
+    public void setLeftChild(RBNode leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    public RBNode getRightChild() {
+        return rightChild;
+    }
+
+    public void setRightChild(RBNode rightChild) {
+        this.rightChild = rightChild;
+    }
+
+    public RBNode getParent() {
+        return parent;
+    }
+
+    public void setParent(RBNode parent) {
+        this.parent = parent;
+    }
+
+    public boolean isLeaf() {
+        return isLeaf;
+    }
+
+    public void setLeaf(boolean leaf) {
+        isLeaf = leaf;
+    }
+
+    public Color getNodeColor() {
+        return nodeColor;
+    }
+
+    public void setNodeColor(Color nodeColor) {
+        this.nodeColor = nodeColor;
     }
 }
