@@ -1,19 +1,69 @@
 # Java Recursion Practice
 
-This repository is intended for practicing recursion in Java. It includes a set of small programming tasks designed to improve your skills in using recursion. Each task is presented as a separate Java class that you can complete and submit as a commit to the repository.
+A compact Java playground to practice classic recursion problems and experiment with a simple Red-Black Tree implementation.
 
-## Tasks
-- **Factorial**: Write a function to calculate the factorial of a number using recursion. ✓
-- **Fibonacci**: Write a function to calculate the N-th Fibonacci number using recursion. ✓
-- **Array Sum**: Write a function to find the sum of all numbers in an array using recursion. ✓
-- **Digit Sum**: Write a function to calculate the sum of the digits of a number using recursion. ✓
-- **String Reversal**: Write a function to reverse a string using recursion. ✓
-- **Array Max**: Write a function to find the largest element in an array using recursion. ✓
-- **Array Count**: Write a function to count the number of occurrences of an element in an array using recursion. ✓
-- **The Greatest Common Divisor**: Write a function to find the GCD (The Greatest Common Divisor) of two numbers using recursion. ✓
-- **Palindrome**: Write a function to check if a string is a palindrome using recursion. ✓
-- **Power**: Write a function to calculate the power of a number using recursion. ✓
-- **Red-Black Tree Operations**: Implement various operations on a Red-Black Tree using recursion. Red-Black Tree is a self-balancing binary search tree with the additional property of color (red or black) assigned to each node. The task involves writing recursive functions for operations such as insertion, deletion, search, and traversal on a Red-Black Tree. This task provides an opportunity to practice recursion in the context of a complex data structure and understand the principles of maintaining balance in a Red-Black Tree.
+## What’s inside
+- Practice problems implemented in `src/RecursionSolver.java`
+- A small demo runner in `src/MainApplication.java`
+- A minimal Red-Black Tree node implementation in `src/redBlackTreeOperations/`
+- JUnit 5 tests for tree behavior in `test/RBNodeTest.java`
 
-## Disclaimer
-The programming tasks in this repository are provided for educational purposes only. The solutions provided may not be the most efficient or optimal solutions. They are intended to demonstrate the use of recursion in solving common programming problems.
+## Tasks covered
+- Factorial ✓
+- Fibonacci (N-th member) ✓
+- Sum of digits ✓
+- Array sum ✓
+- Array max ✓
+- Count occurrences in array ✓
+- GCD (Greatest Common Divisor) ✓
+- Palindrome check ✓
+- Power (exponentiation) ✓
+- Red-Black Tree operations (toy implementation: insert, delete, rotate, traversal, color-fix) ✓
+
+## Project structure
+```
+java-recursion-practice/
+  lib/                         # JUnit 5 & dependencies (JARs)
+  src/
+    MainApplication.java       # Quick manual demo
+    RecursionSolver.java       # Recursion exercises
+    redBlackTreeOperations/
+      Color.java
+      RBNode.java
+      RotateCondition.java
+      TraversalType.java
+  test/
+    RBNodeTest.java            # JUnit 5 tests for RBNode
+```
+
+## Requirements
+- Java 17+ (recommended)
+- Gradle Wrapper included (`./gradlew`, `gradlew.bat`)
+- Any IDE with Gradle & JUnit 5 support
+
+## Build & run with Gradle
+Using the Gradle Wrapper from the project root:
+
+```bash
+# Windows PowerShell
+./gradlew.bat clean build
+./gradlew.bat run
+```
+
+This runs `MainApplication` and prints sample outputs for the recursion tasks plus Red-Black Tree traversals.
+
+## Run tests
+With Gradle (JUnit 5):
+
+```bash
+# Windows PowerShell
+./gradlew.bat test
+```
+
+Your IDE can also run `RBNodeTest` directly using the Gradle test runner.
+
+## Notes on the Red-Black Tree
+The `RBNode` here is intentionally minimal and educational. It exposes basic operations and prints simple traversals. It is not a full production-grade Red-Black Tree, but it’s useful for practicing invariants, rotations, and color adjustments.
+
+## License
+This project is provided for educational purposes. Use it freely.
