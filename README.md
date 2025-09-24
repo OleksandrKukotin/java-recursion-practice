@@ -4,7 +4,7 @@ A compact Java playground to practice classic recursion problems and experiment 
 
 ## What’s inside
 - Practice problems implemented in `src/RecursionSolver.java`
-- A small demo runner in `src/MainApplication.java`
+- A small demo runner in `src/MainApplication.java` (now only demonstrates Red-Black Tree)
 - A minimal Red-Black Tree node implementation in `src/redBlackTreeOperations/`
 - JUnit 5 tests for tree behavior in `test/RBNodeTest.java`
 
@@ -34,6 +34,7 @@ java-recursion-practice/
       TraversalType.java
   test/
     RBNodeTest.java            # JUnit 5 tests for RBNode
+    RecursionSolverTest.java
 ```
 
 ## Requirements
@@ -50,7 +51,7 @@ Using the Gradle Wrapper from the project root:
 ./gradlew.bat run
 ```
 
-This runs `MainApplication` and prints sample outputs for the recursion tasks plus Red-Black Tree traversals.
+This runs `MainApplication` and prints Red-Black Tree traversals. Recursion tasks are validated via unit tests.
 
 ## Run tests
 With Gradle (JUnit 5):
