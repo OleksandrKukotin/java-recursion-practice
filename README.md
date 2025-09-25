@@ -9,16 +9,16 @@ A compact Java playground to practice classic recursion problems and experiment 
 - JUnit 5 tests for tree behavior in `test/RBNodeTest.java`
 
 ## Tasks covered
-- Factorial ✓
-- Fibonacci (N-th member) ✓
-- Sum of digits ✓
-- Array sum ✓
-- Array max ✓
-- Count occurrences in array ✓
-- GCD (Greatest Common Divisor) ✓
-- Palindrome check ✓
-- Power (exponentiation) ✓
-- Red-Black Tree operations (toy implementation: insert, delete, rotate, traversal, color-fix) ✓
+- [x] Factorial
+- [x] Fibonacci (N-th member)
+- [x] Sum of digits
+- [x] Array sum
+- [x] Array max
+- [x] Count occurrences in array
+- [x] GCD (Greatest Common Divisor)
+- [x] Palindrome check
+- [x] Power (exponentiation)
+- [ ] Red-Black Tree operations (toy implementation: insert, delete, rotate, traversal, color-fix)
 
 ## Project structure
 ```
@@ -32,8 +32,8 @@ java-recursion-practice/
       RBNode.java
       RotateCondition.java
       TraversalType.java
-  test/
-    RBNodeTest.java            # JUnit 5 tests for RBNode
+  test/ # JUnit 5 tests
+    RBNodeTest.java
     RecursionSolverTest.java
 ```
 
