@@ -24,7 +24,15 @@ public class RBNode {
     }
 
     public boolean insertNode(int value) {
-        if (value >= this.value) {
+        if (this.isLeaf) {
+            return false;
+        }
+
+        if (value == this.value) {
+            return false; // disallow duplicates
+        }
+
+        if (value > this.value) {
             if (this.rightChild.isLeaf) {
                 this.rightChild = new RBNode(value);
                 this.rightChild.parent = this;
@@ -37,7 +45,7 @@ public class RBNode {
                 }
                 return inserted;
             }
-        } else {
+        } else { // value < this.value
             if (this.leftChild.isLeaf) {
                 this.leftChild = new RBNode(value);
                 this.leftChild.parent = this;
@@ -54,9 +62,28 @@ public class RBNode {
     }
 
     public boolean deleteNode(int value) {
-        if (value >= this.value) {
+        if (this.isLeaf) {
+            return false;
+        }
+
+        if (value > this.value) {
+            if (this.rightChild.isLeaf) {
+                return false;
+            }
             if (this.rightChild.value == value) {
-                this.rightChild = new RBNode();
+                // Promote a single child if exists; otherwise remove
+                RBNode target = this.rightChild;
+                boolean hasLeft = target.leftChild != null && !target.leftChild.isLeaf;
+                boolean hasRight = target.rightChild != null && !target.rightChild.isLeaf;
+                if (hasLeft && !hasRight) {
+                    this.rightChild = target.leftChild;
+                    this.rightChild.parent = this;
+                } else if (!hasLeft && hasRight) {
+                    this.rightChild = target.rightChild;
+                    this.rightChild.parent = this;
+                } else {
+                    this.rightChild = new RBNode();
+                }
                 fixColor(); // Fix color after deletion
                 return true;
             } else {
@@ -66,9 +93,24 @@ public class RBNode {
                 }
                 return deleted;
             }
-        } else {
+        } else if (value < this.value) {
+            if (this.leftChild.isLeaf) {
+                return false;
+            }
             if (this.leftChild.value == value) {
-                this.leftChild = new RBNode();
+                // Promote a single child if exists; otherwise remove
+                RBNode target = this.leftChild;
+                boolean hasLeft = target.leftChild != null && !target.leftChild.isLeaf;
+                boolean hasRight = target.rightChild != null && !target.rightChild.isLeaf;
+                if (hasLeft && !hasRight) {
+                    this.leftChild = target.leftChild;
+                    this.leftChild.parent = this;
+                } else if (!hasLeft && hasRight) {
+                    this.leftChild = target.rightChild;
+                    this.leftChild.parent = this;
+                } else {
+                    this.leftChild = new RBNode();
+                }
                 fixColor(); // Fix color after deletion
                 return true;
             } else {
@@ -78,26 +120,27 @@ public class RBNode {
                 }
                 return deleted;
             }
+        } else { // value == this.value
+            return false;
         }
     }
 
     RotateCondition determineRotateCondition() {
-        if (this.nodeColor == Color.RED) {
-            if (this.leftChild.nodeColor == Color.RED) {
-                if (this.leftChild.leftChild.nodeColor == Color.RED) {
-                    return RotateCondition.LL;
-                }
-                if (this.leftChild.rightChild.nodeColor == Color.RED) {
-                    return RotateCondition.LR;
-                }
+        // Determine rotation need based on structure, not colors
+        if (this.leftChild != null && !this.leftChild.isLeaf) {
+            if (this.leftChild.leftChild != null && !this.leftChild.leftChild.isLeaf) {
+                return RotateCondition.LL;
             }
-            if (this.rightChild.nodeColor == Color.RED) {
-                if (this.rightChild.rightChild.nodeColor == Color.RED) {
-                    return RotateCondition.RR;
-                }
-                if (this.rightChild.leftChild.nodeColor == Color.RED) {
-                    return RotateCondition.RL;
-                }
+            if (this.leftChild.rightChild != null && !this.leftChild.rightChild.isLeaf) {
+                return RotateCondition.LR;
+            }
+        }
+        if (this.rightChild != null && !this.rightChild.isLeaf) {
+            if (this.rightChild.rightChild != null && !this.rightChild.rightChild.isLeaf) {
+                return RotateCondition.RR;
+            }
+            if (this.rightChild.leftChild != null && !this.rightChild.leftChild.isLeaf) {
+                return RotateCondition.RL;
             }
         }
         return RotateCondition.NN;
@@ -114,41 +157,51 @@ public class RBNode {
     }
 
     private boolean leftRotate() {
-        if (this.rightChild.isLeaf) {
+        if (this.rightChild == null || this.rightChild.isLeaf) {
             return false; // Cannot perform left rotation if the right child is a leaf node
         }
 
-        RBNode newRoot = this.rightChild;
-        this.rightChild = newRoot.leftChild;
-        newRoot.leftChild = this;
+        RBNode pivot = this.rightChild;
 
-        if (!this.isRoot()) {
-            if (this.isLeftChild()) {
-                this.parent.leftChild = newRoot;
-            } else {
-                this.parent.rightChild = newRoot;
-            }
-        }
+        // Perform in-place rotation by swapping values and re-linking children
+        int originalValue = this.value;
+        this.value = pivot.value;
+        pivot.value = originalValue;
+
+        RBNode originalLeft = this.leftChild;
+        RBNode originalRightRight = pivot.rightChild;
+        RBNode pivotLeft = pivot.leftChild;
+
+        // Rewire children
+        this.rightChild = originalRightRight;
+        pivot.rightChild = pivotLeft; // becomes pivot's right subtree
+        pivot.leftChild = originalLeft; // pivot becomes the left child with old left subtree
+        this.leftChild = pivot;
 
         return true;
     }
 
     private boolean rightRotate() {
-        if (this.leftChild.isLeaf) {
+        if (this.leftChild == null || this.leftChild.isLeaf) {
             return false; // Cannot perform right rotation if the left child is a leaf node
         }
 
-        RBNode newRoot = this.leftChild;
-        this.leftChild = newRoot.rightChild;
-        newRoot.rightChild = this;
+        RBNode pivot = this.leftChild;
 
-        if (!this.isRoot()) {
-            if (this.isLeftChild()) {
-                this.parent.leftChild = newRoot;
-            } else {
-                this.parent.rightChild = newRoot;
-            }
-        }
+        // Perform in-place rotation by swapping values and re-linking children
+        int originalValue = this.value;
+        this.value = pivot.value;
+        pivot.value = originalValue;
+
+        RBNode originalRight = this.rightChild;
+        RBNode originalLeftLeft = pivot.leftChild;
+        RBNode pivotRight = pivot.rightChild;
+
+        // Rewire children
+        this.leftChild = originalLeftLeft;
+        pivot.leftChild = pivotRight; // becomes pivot's left subtree
+        pivot.rightChild = originalRight; // pivot becomes the right child with old right subtree
+        this.rightChild = pivot;
 
         return true;
     }
@@ -177,7 +230,8 @@ public class RBNode {
         int leftHeight = this.leftChild.getHeight();
         int rightHeight = this.rightChild.getHeight();
 
-        if (Math.abs(leftHeight - rightHeight) > 1) {
+        // Consider unbalanced if both sides grow beyond height 1
+        if (leftHeight > 1 && rightHeight > 1) {
             return false;
         }
 
